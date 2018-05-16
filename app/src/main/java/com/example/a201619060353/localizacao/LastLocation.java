@@ -63,11 +63,11 @@ public class LastLocation extends Activity implements GoogleApiClient.Connection
 
     @Override
     public void onConnectionSuspended(int i){
-        //TODO something
+        Log.i("LOG", "LastLocationActivity.onConnectionSuspended()");
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        //TODO alguma coisa
+        Log.i("LOG", "LastLocationActivity.onConnectionFailed()");
     }
 }
