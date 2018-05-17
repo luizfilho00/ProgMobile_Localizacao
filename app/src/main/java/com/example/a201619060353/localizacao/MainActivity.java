@@ -11,38 +11,46 @@ import android.widget.ListView;
 public class MainActivity extends Activity {
 
     private ListView listView;
-    String[] activities = {"LastLocationActivity", "UpdateLocationActivity",
-            "AddressLocationActivity", "Map" };
-
+    private String[] activities = {"LastLocationActivity",
+            "UpdateLocationActivity",
+            "AddressLocationActivity"};
+    private double lati=-20.501250;
+    private double longi=-54.613495;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        listView = findViewById(R.id.listView);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, activities);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, activities);
+        listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int
+                    position, long id) {
                 Intent intent = null;
-                switch (position){
+                switch(position){
                     case 0:
-                        intent = new Intent(view.getContext(), LastLocation.class);
+                        intent = new Intent(view.getContext(),
+                                LastLocation.class);
                         break;
                     case 1:
-                        intent = new Intent(view.getContext(), UpdateLocationActivity.class);
+                        intent = new Intent(view.getContext(),
+                                UpdateLocationActivity.class);
                         break;
-                    case 2:
-                        intent = new Intent(view.getContext(), AddressLocationActivity.class);
+                    case 2:{
+                        intent = new Intent(view.getContext(),AddressLocationActivity.class);
+                        Bundle param = new Bundle();
+                        param.putString("lati", Double.toString(lati));
+                        param.putString("longi", Double.toString(longi));
+                        intent.putExtras(param);
                         break;
-                    case 3:
-                        intent = new Intent(view.getContext(), MapsActivity.class);
-                        break;
+                    }
                 }
                 startActivity(intent);
             }
         });
     }
+
 
 }
